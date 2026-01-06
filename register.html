@@ -18,47 +18,36 @@
   <h1>Créer un compte</h1>
 
   <div class="card">
-    <label>
-      Nom d’utilisateur
-      <input id="username" type="text" placeholder="ex : julien" />
-    </label>
+    <div class="row">
+      <label>
+        Nom d’utilisateur
+        <input id="regUsername" type="text" placeholder="ex : julien" />
+      </label>
 
-    <label>
-      Mot de passe
-      <input id="password" type="password" placeholder="••••••••" />
-    </label>
+      <label>
+        Mot de passe
+        <input id="regPassword" type="password" placeholder="••••••••" />
+      </label>
 
-    <button id="registerBtn" class="btn btn--primary">Créer le compte</button>
+      <label>
+        Confirmer le mot de passe
+        <input id="regPasswordConfirm" type="password" placeholder="••••••••" />
+      </label>
+    </div>
 
-    <p id="registerMsg" class="muted"></p>
+    <div class="actions">
+      <button id="registerBtn" class="btn btn--primary">
+        Créer le compte
+      </button>
+      <a href="login.html" class="btn btn--secondary">
+        Retour à la connexion
+      </a>
+    </div>
+
+    <p class="muted" id="registerMsg"></p>
   </div>
 </div>
 
-<script>
-document.getElementById("registerBtn").addEventListener("click", async () => {
-  const username = document.getElementById("username").value.trim();
-  const password = document.getElementById("password").value;
-  const msg = document.getElementById("registerMsg");
-
-  msg.textContent = "";
-
-  try {
-    const res = await fetch("/api/register", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ username, password })
-    });
-
-    const data = await res.json();
-    if (!res.ok) throw new Error(data.message);
-
-    msg.textContent = "Compte créé ✔️ Redirection…";
-    setTimeout(() => location.href = "/login.html", 1000);
-  } catch (err) {
-    msg.textContent = err.message;
-  }
-});
-</script>
-
+<script src="app.js"></script>
 </body>
 </html>
