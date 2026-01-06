@@ -96,6 +96,41 @@ app.post("/api/login", async (req, res) => {
   req.session.user = { id: userRow.id, username: userRow.username };
   return res.json({ ok: true });
 });
+const bcrypt = require("bcrypt");
+
+// Créer un compte utilisateur
+app.post("/api/register", async (req, res) => {
+  const { username, password } = req.body;
+
+  if (!username || !password) {
+    return res.status(400).json({ message: "Champs manquants" });
+  }
+
+  if (username.length < 3 || password.length < 6) {
+    return res.status(400).json({
+      message: "Nom ≥ 3 caractères, mot de passe ≥ 6 caractères"
+    });
+  }
+
+  const db = getDb();
+
+  const existing = db.prepare(
+    "SELECT id FROM users WHERE username = ?"
+  ).get(username);
+
+  if (existing) {
+    return res.status(400).json({ message: "Utilisateur déjà existant" });
+  }
+
+  const hash = await bcrypt.hash(password, 10);
+
+  db.prepare(
+    "INSERT INTO users (username, password) VALUES (?, ?)"
+  ).run(username, hash);
+
+  res.json({ success: true });
+});
+
 
 // Déconnexion
 app.post("/api/logout", (req, res) => {
