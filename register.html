@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Créer un compte</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar__inner">
+    <div class="brand"><span class="brand__dot"></span> Outil Ventes</div>
+  </div>
+</header>
+
+<div class="container">
+  <h1>Créer un compte</h1>
+
+  <div class="card">
+    <label>
+      Nom d’utilisateur
+      <input id="username" type="text" placeholder="ex : julien" />
+    </label>
+
+    <label>
+      Mot de passe
+      <input id="password" type="password" placeholder="••••••••" />
+    </label>
+
+    <button id="registerBtn" class="btn btn--primary">Créer le compte</button>
+
+    <p id="registerMsg" class="muted"></p>
+  </div>
+</div>
+
+<script>
+document.getElementById("registerBtn").addEventListener("click", async () => {
+  const username = document.getElementById("username").value.trim();
+  const password = document.getElementById("password").value;
+  const msg = document.getElementById("registerMsg");
+
+  msg.textContent = "";
+
+  try {
+    const res = await fetch("/api/register", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username, password })
+    });
+
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.message);
+
+    msg.textContent = "Compte créé ✔️ Redirection…";
+    setTimeout(() => location.href = "/login.html", 1000);
+  } catch (err) {
+    msg.textContent = err.message;
+  }
+});
+</script>
+
+</body>
+</html>
