@@ -3,51 +3,60 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Stats</title>
+  <title>Statistiques</title>
   <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
-
-  <nav class="nav">
-    <a class="nav__brand" href="index.html">Mon outil</a>
-    <div class="nav__links">
-      <a class="nav__link" href="index.html">Accueil</a>
-      <a class="nav__link" href="ventes.html">Ventes</a>
-      <a class="nav__link" href="stats.html">Stats</a>
-      <a class="nav__link" href="login.html">Connexion</a>
-
+  <!-- Barre du haut -->
+  <header class="topbar">
+    <div class="topbar__inner">
+      <div class="brand"><span class="brand__dot"></span> Outil Ventes</div>
+      <nav class="nav__links">
+        <a class="nav__link" href="index.html">Accueil</a>
+        <a class="nav__link" href="ventes.html">Ventes</a>
+        <a class="nav__link" href="stats.html">Stats</a>
+      </nav>
     </div>
-  </nav>
+  </header>
 
-  <div class="container">
-    <h1>📊 Statistiques</h1>
-
+  <!-- Contenu principal -->
+  <main class="container">
     <div class="card">
+      <h1 class="h1">📊 Statistiques</h1>
+      <p class="p">Vue d’ensemble des performances de vente.</p>
+
       <div class="stats">
         <div class="stat">
           <div class="stat__label">Total</div>
-          <div class="stat__value"><span id="statTotal">0.00</span> €</div>
+          <div class="stat__value">
+            <span id="statTotal">0.00</span> €
+          </div>
         </div>
 
         <div class="stat">
           <div class="stat__label">Nombre de ventes</div>
-          <div class="stat__value"><span id="statNb">0</span></div>
+          <div class="stat__value">
+            <span id="statNb">0</span>
+          </div>
         </div>
 
         <div class="stat">
           <div class="stat__label">Panier moyen</div>
-          <div class="stat__value"><span id="statMoy">0.00</span> €</div>
+          <div class="stat__value">
+            <span id="statMoy">0.00</span> €
+          </div>
         </div>
       </div>
 
-      <hr class="sep"/>
+      <hr class="sep" />
 
-      <p class="muted">
-        Les stats se basent sur les ventes sauvegardées (localStorage).  
+      <p class="p muted">
+        Les statistiques sont calculées à partir des ventes enregistrées.
         Ajoute des ventes dans l’onglet <strong>Ventes</strong> pour voir les chiffres évoluer.
       </p>
     </div>
-  </div>
+  </main>
 
   <script src="app.js"></script>
 </body>

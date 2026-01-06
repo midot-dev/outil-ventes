@@ -6,42 +6,69 @@
   <title>Connexion</title>
   <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
-
-  <nav class="nav">
-    <a class="nav__brand" href="index.html">Mon outil</a>
-    <div class="nav__links">
-      <a class="nav__link" href="index.html">Accueil</a>
-      <a class="nav__link" href="login.html">Connexion</a>
+  <!-- Barre du haut -->
+  <header class="topbar">
+    <div class="topbar__inner">
+      <div class="brand"><span class="brand__dot"></span> Outil Ventes</div>
+      <nav class="nav__links">
+        <a class="nav__link" href="index.html">Accueil</a>
+        <a class="nav__link" href="ventes.html">Ventes</a>
+        <a class="nav__link" href="stats.html">Stats</a>
+      </nav>
     </div>
-  </nav>
+  </header>
 
-  <div class="container">
-    <h1>Connexion</h1>
+  <!-- Contenu principal -->
+  <main class="container">
+    <div class="grid">
+      <!-- Colonne gauche : texte -->
+      <section class="card">
+        <h1 class="h1">Connexion</h1>
+        <p class="p">
+          Connecte-toi pour accéder à l’outil.
+        </p>
 
-    <div class="card">
-      <div class="row">
-        <label>
-          Nom d’utilisateur
-          <input id="username" type="text" placeholder="ex : julien" autocomplete="username">
-        </label>
+        <div class="kpi" style="margin-top:14px;">
+          <span>Prototype</span>
+          <strong>admin / 1234</strong>
+        </div>
 
-        <label>
-          Mot de passe
-          <input id="password" type="password" placeholder="••••••••" autocomplete="current-password">
-        </label>
-      </div>
+        <p class="p" style="margin-top:12px;">
+          (Plus tard, on passera à des comptes utilisateurs réels + mot de passe sécurisé.)
+        </p>
+      </section>
 
-      <div class="actions">
-        <button id="loginBtn" class="btn btn--primary" type="button">Se connecter</button>
-      </div>
+      <!-- Colonne droite : formulaire -->
+      <section class="card">
+        <h2 class="h1" style="font-size:22px;">Se connecter</h2>
+        <p class="p">Entre tes identifiants.</p>
 
-      <p class="muted" id="loginMsg"></p>
-      <p class="muted">
-        (Prototype) Identifiants par défaut : <strong>admin</strong> / <strong>1234</strong>
-      </p>
+        <div class="form">
+          <div class="field">
+            <label for="username">Nom d’utilisateur</label>
+            <input class="input" id="username" type="text" placeholder="ex : admin" autocomplete="username" />
+          </div>
+
+          <div class="field">
+            <label for="password">Mot de passe</label>
+            <input class="input" id="password" type="password" placeholder="••••••••" autocomplete="current-password" />
+          </div>
+        </div>
+
+        <div class="row">
+          <button id="loginBtn" class="btn" type="button">Se connecter</button>
+          <a class="btn btn--ghost" href="index.html">Retour</a>
+        </div>
+        
+
+        <!-- message (erreur) -->
+        <div id="loginMsg" class="alert alert--error" style="display:none; margin-top:12px;"></div>
+
+      </section>
     </div>
-  </div>
+  </main>
 
   <script src="app.js"></script>
 </body>

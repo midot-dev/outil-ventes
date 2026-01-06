@@ -6,50 +6,56 @@
   <title>Ventes</title>
   <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
-
-  <nav class="nav">
-    <a class="nav__brand" href="index.html">Mon outil</a>
-    <div class="nav__links">
-      <a class="nav__link" href="index.html">Accueil</a>
-      <a class="nav__link" href="ventes.html">Ventes</a>
-      <a class="nav__link" href="stats.html">Stats</a>
-      <a class="nav__link" href="login.html">Connexion</a>
-
+  <!-- Barre du haut -->
+  <header class="topbar">
+    <div class="topbar__inner">
+      <div class="brand"><span class="brand__dot"></span> Outil Ventes</div>
+      <nav class="nav__links">
+        <a class="nav__link" href="index.html">Accueil</a>
+        <a class="nav__link" href="ventes.html">Ventes</a>
+        <a class="nav__link" href="stats.html">Stats</a>
+      </nav>
     </div>
-  </nav>
+  </header>
 
-  <div class="container">
-    <h1>Gestion des ventes</h1>
-
+  <!-- Contenu principal -->
+  <main class="container">
     <div class="card">
+      <h1 class="h1">Gestion des ventes</h1>
+      <p class="p">Ajoute une vente rapidement, puis exporte en CSV.</p>
+
+      <div class="form">
+        <div class="field">
+          <label for="nom">Nom</label>
+          <input class="input" id="nom" type="text" placeholder="Ex : Pad Thaï" autocomplete="off" />
+        </div>
+
+        <div class="field">
+          <label for="montant">Montant (€)</label>
+          <input class="input" id="montant" type="number" step="0.01" placeholder="Ex : 9.50" />
+        </div>
+      </div>
+
       <div class="row">
-        <label>
-          Nom
-          <input id="nom" type="text" placeholder="Ex : Pad Thaï" autocomplete="off" />
-        </label>
-
-        <label>
-          Montant (€)
-          <input id="montant" type="number" step="0.01" placeholder="Ex : 9.50" />
-        </label>
-      </div>
-
-      <div class="actions">
-        <button id="btn" class="btn btn--primary" type="button">Ajouter</button>
+        <button id="btn" class="btn" type="button">Ajouter</button>
         <button id="undo" class="btn btn--danger" type="button">Annuler</button>
-        <button id="export" class="btn btn--success" type="button">Exporter CSV</button>
+        <button id="export" class="btn btn--ghost" type="button">Exporter CSV</button>
       </div>
 
-      <p class="total">Total : <span id="total">0.00</span> €</p>
-
-      <ul id="liste" class="liste"></ul>
-
-      <div class="hint muted">
-        Conseil : tu peux appuyer sur <strong>Entrée</strong> dans “Nom” ou “Montant” pour ajouter.
+      <div class="kpi">
+        <span>Total</span>
+        <strong><span id="total">0.00</span> €</strong>
       </div>
+
+      <ul id="liste" class="list"></ul>
+
+      <p class="p" style="margin-top:12px;">
+        Astuce : tu peux appuyer sur <strong>Entrée</strong> dans “Nom” ou “Montant” pour ajouter.
+      </p>
     </div>
-  </div>
+  </main>
 
   <script src="app.js"></script>
 </body>

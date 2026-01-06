@@ -103,18 +103,23 @@ function initLoginPage() {
   if (!loginBtn || !userInput || !passInput) return;
 
   async function tenterConnexion() {
-    const u = userInput.value.trim();
-    const p = passInput.value;
+  const u = userInput.value.trim();
+  const p = passInput.value;
 
-    msg.textContent = "";
+  msg.textContent = "";
+  msg.style.display = "none";
+  loginBtn.disabled = true; // 🔒 on bloque le bouton
 
-    try {
-      await apiLogin(u, p);
-      window.location.href = "/ventes.html";
-    } catch (err) {
-      msg.textContent = err.message;
-    }
+  try {
+    await apiLogin(u, p);
+    window.location.href = "/ventes.html";
+  } catch (err) {
+    msg.style.display = "block";
+    msg.textContent = err.message;
+  } finally {
+    loginBtn.disabled = false; // 🔓 on débloque TOUJOURS
   }
+}
 
   loginBtn.addEventListener("click", tenterConnexion);
   passInput.addEventListener("keydown", (e) => { if (e.key === "Enter") tenterConnexion(); });
