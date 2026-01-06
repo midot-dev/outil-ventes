@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mon outil</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <nav class="nav">
+    <a class="nav__brand" href="index.html">Mon outil</a>
+    <div class="nav__links">
+      <a class="nav__link" href="index.html">Accueil</a>
+      <a class="nav__link" href="ventes.html">Ventes</a>
+      <a class="nav__link" href="stats.html">Stats</a>
+      <a class="nav__link" href="login.html">Connexion</a>
+
+    </div>
+  </nav>
+
+  <div class="container">
+    <h1>Bienvenue 👋</h1>
+
+    <div class="card">
+      <p class="muted">
+        Cet outil te permet d’enregistrer des ventes, annuler la dernière, exporter en CSV (Excel),
+        et consulter des statistiques.
+      </p>
+
+      <div class="grid-2">
+        <a class="biglink" href="ventes.html">
+          <div class="biglink__title">➡️ Gestion des ventes</div>
+          <div class="biglink__desc">Ajouter / Annuler / Export CSV</div>
+        </a>
+
+        <a class="biglink" href="stats.html">
+          <div class="biglink__title">📊 Statistiques</div>
+          <div class="biglink__desc">Total / Nombre de ventes / Panier moyen</div>
+        </a>
+      </div>
+
+      <hr class="sep"/>
+
+      <p class="muted">
+        Astuce : utilise <strong>Entrée</strong> dans les champs pour valider rapidement.
+      </p>
+    </div>
+  </div>
+
+</body>
+</html>

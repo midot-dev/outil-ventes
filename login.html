@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Connexion</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <nav class="nav">
+    <a class="nav__brand" href="index.html">Mon outil</a>
+    <div class="nav__links">
+      <a class="nav__link" href="index.html">Accueil</a>
+      <a class="nav__link" href="login.html">Connexion</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <h1>Connexion</h1>
+
+    <div class="card">
+      <div class="row">
+        <label>
+          Nom d’utilisateur
+          <input id="username" type="text" placeholder="ex : julien" autocomplete="username">
+        </label>
+
+        <label>
+          Mot de passe
+          <input id="password" type="password" placeholder="••••••••" autocomplete="current-password">
+        </label>
+      </div>
+
+      <div class="actions">
+        <button id="loginBtn" class="btn btn--primary" type="button">Se connecter</button>
+      </div>
+
+      <p class="muted" id="loginMsg"></p>
+      <p class="muted">
+        (Prototype) Identifiants par défaut : <strong>admin</strong> / <strong>1234</strong>
+      </p>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

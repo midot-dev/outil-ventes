@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ventes</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <nav class="nav">
+    <a class="nav__brand" href="index.html">Mon outil</a>
+    <div class="nav__links">
+      <a class="nav__link" href="index.html">Accueil</a>
+      <a class="nav__link" href="ventes.html">Ventes</a>
+      <a class="nav__link" href="stats.html">Stats</a>
+      <a class="nav__link" href="login.html">Connexion</a>
+
+    </div>
+  </nav>
+
+  <div class="container">
+    <h1>Gestion des ventes</h1>
+
+    <div class="card">
+      <div class="row">
+        <label>
+          Nom
+          <input id="nom" type="text" placeholder="Ex : Pad Thaï" autocomplete="off" />
+        </label>
+
+        <label>
+          Montant (€)
+          <input id="montant" type="number" step="0.01" placeholder="Ex : 9.50" />
+        </label>
+      </div>
+
+      <div class="actions">
+        <button id="btn" class="btn btn--primary" type="button">Ajouter</button>
+        <button id="undo" class="btn btn--danger" type="button">Annuler</button>
+        <button id="export" class="btn btn--success" type="button">Exporter CSV</button>
+      </div>
+
+      <p class="total">Total : <span id="total">0.00</span> €</p>
+
+      <ul id="liste" class="liste"></ul>
+
+      <div class="hint muted">
+        Conseil : tu peux appuyer sur <strong>Entrée</strong> dans “Nom” ou “Montant” pour ajouter.
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
