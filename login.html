@@ -23,24 +23,19 @@
   <!-- Contenu principal -->
   <main class="container">
     <div class="grid">
-      <!-- Colonne gauche : texte -->
+
+      <!-- Colonne gauche -->
       <section class="card">
         <h1 class="h1">Connexion</h1>
-        <p class="p">
-          Connecte-toi pour accéder à l’outil.
-        </p>
+        <p class="p">Connecte-toi pour accéder à l’outil.</p>
 
         <div class="kpi" style="margin-top:14px;">
           <span>Prototype</span>
           <strong>admin / 1234</strong>
         </div>
-
-        <p class="p" style="margin-top:12px;">
-          modif reste a faire
-        </p>
       </section>
 
-      <!-- Colonne droite : formulaire -->
+      <!-- Colonne droite -->
       <section class="card">
         <h2 class="h1" style="font-size:22px;">Se connecter</h2>
         <p class="p">Entre tes identifiants.</p>
@@ -58,27 +53,21 @@
         </div>
 
         <div class="row">
-          <button id="loginBtn" class="btn" type="button">Se connecter</button>
-          <a class="btn btn--ghost" href="index.html">Retour</a>
+          <!-- UN SEUL bouton login -->
+          <button id="loginBtn" class="btn" type="button">
+            Se connecter
+          </button>
+
+          <!-- BOUTON CREATION DE COMPTE -->
+          <a href="register.html" class="btn btn--ghost">
+            Créer un compte
+          </a>
         </div>
-        <div class="actions">
-  <button id="loginBtn" class="btn btn--primary" type="button">
-    Se connecter
-  </button>
-</div>
 
-<div class="actions">
-  <a href="register.html" class="btn btn--secondary">
-    Créer un compte
-  </a>
-</div>
-
-        
-
-        <!-- message (erreur) -->
+        <!-- Message erreur -->
         <div id="loginMsg" class="alert alert--error" style="display:none; margin-top:12px;"></div>
-
       </section>
+
     </div>
   </main>
 
