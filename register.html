@@ -6,48 +6,45 @@
   <title>Créer un compte</title>
   <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
-
-<header class="topbar">
-  <div class="topbar__inner">
-    <div class="brand"><span class="brand__dot"></span> Outil Ventes</div>
-  </div>
-</header>
-
-<div class="container">
-  <h1>Créer un compte</h1>
-
-  <div class="card">
-    <div class="row">
-      <label>
-        Nom d’utilisateur
-        <input id="regUsername" type="text" placeholder="ex : julien" />
-      </label>
-
-      <label>
-        Mot de passe
-        <input id="regPassword" type="password" placeholder="••••••••" />
-      </label>
-
-      <label>
-        Confirmer le mot de passe
-        <input id="regPasswordConfirm" type="password" placeholder="••••••••" />
-      </label>
+  <header class="topbar">
+    <div class="topbar__inner">
+      <div class="brand"><span class="brand__dot"></span> Outil Ventes</div>
+      <nav class="nav__links">
+        <a class="nav__link" href="index.html">Accueil</a>
+        <a class="nav__link" href="login.html">Connexion</a>
+      </nav>
     </div>
+  </header>
 
-    <div class="actions">
-      <button id="registerBtn" class="btn btn--primary">
-        Créer le compte
-      </button>
-      <a href="login.html" class="btn btn--secondary">
-        Retour à la connexion
-      </a>
+  <main class="container">
+    <div class="card">
+      <h1 class="h1">Créer un compte</h1>
+      <p class="p">Choisis un nom d’utilisateur et un mot de passe.</p>
+
+      <form id="registerForm" class="form">
+        <div class="field">
+          <label for="regUsername">Nom d’utilisateur</label>
+          <input class="input" id="regUsername" type="text" placeholder="ex : julien" autocomplete="username" />
+        </div>
+
+        <div class="field">
+          <label for="regPassword">Mot de passe</label>
+          <input class="input" id="regPassword" type="password" placeholder="min 6 caractères" autocomplete="new-password" />
+        </div>
+
+        <div class="row" style="margin-top:12px;">
+          <button id="registerBtn" class="btn btn--primary" type="submit">Créer</button>
+          <a class="btn btn--ghost" href="login.html">Retour</a>
+        </div>
+
+        <div id="registerMsg" class="alert alert--error" style="display:none; margin-top:12px;"></div>
+        <div id="registerOk" class="alert alert--success" style="display:none; margin-top:12px;"></div>
+      </form>
     </div>
+  </main>
 
-    <p class="muted" id="registerMsg"></p>
-  </div>
-</div>
-
-<script src="app.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>

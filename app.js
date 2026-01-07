@@ -6,6 +6,15 @@ async function apiLogin(username, password) {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ username, password })
   });
+  (async () => {
+  await protegerPages();
+  await injecterDeconnexion();
+  initLoginPage();
+  initRegisterPage();   // ✅ AJOUT
+  initVentesPage();
+  initStatsPage();
+})();
+
 
   if (!res.ok) {
     const data = await res.json().catch(() => ({}));
@@ -22,6 +31,54 @@ async function apiMe() {
   const res = await fetch("/api/me");
   return res.json(); // { connected: true/false }
 }
+async function apiRegister(username, password) {
+  const res = await fetch("/api/register", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ username, password })
+  });
+
+  const data = await res.json().catch(() => ({}));
+
+  if (!res.ok) {
+    throw new Error(data.message || "Impossible de créer le compte");
+  }
+  return data;
+}
+
+function initRegisterPage() {
+  const form = document.getElementById("registerForm");
+  const userInput = document.getElementById("regUsername");
+  const passInput = document.getElementById("regPassword");
+  const msg = document.getElementById("registerMsg");
+  const okMsg = document.getElementById("registerOk");
+
+  if (!form || !userInput || !passInput) return;
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault(); // ✅ empêche le rechargement de page
+
+    msg.style.display = "none";
+    okMsg.style.display = "none";
+    msg.textContent = "";
+    okMsg.textContent = "";
+
+    const u = userInput.value.trim();
+    const p = passInput.value;
+
+    try {
+      await apiRegister(u, p);
+      okMsg.style.display = "block";
+      okMsg.textContent = "Compte créé ✅ Tu peux maintenant te connecter.";
+      // Option : renvoyer vers login
+      setTimeout(() => (window.location.href = "/login.html"), 900);
+    } catch (err) {
+      msg.style.display = "block";
+      msg.textContent = err.message;
+    }
+  });
+}
+
 
 // Protège ventes.html et stats.html
 async function protegerPages() {
