@@ -47,34 +47,39 @@ async function apiRegister(username, password) {
 }
 
 function initRegisterPage() {
-  const form = document.getElementById("registerForm");
+  const btn = document.getElementById("registerBtn");
   const userInput = document.getElementById("regUsername");
   const passInput = document.getElementById("regPassword");
   const msg = document.getElementById("registerMsg");
-  const okMsg = document.getElementById("registerOk");
 
-  if (!form || !userInput || !passInput) return;
+  if (!btn || !userInput || !passInput) return;
 
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault(); // ✅ empêche le rechargement de page
-
+  btn.addEventListener("click", async () => {
     msg.style.display = "none";
-    okMsg.style.display = "none";
-    msg.textContent = "";
-    okMsg.textContent = "";
 
-    const u = userInput.value.trim();
-    const p = passInput.value;
+    const username = userInput.value.trim();
+    const password = passInput.value;
 
     try {
-      await apiRegister(u, p);
-      okMsg.style.display = "block";
-      okMsg.textContent = "Compte créé ✅ Tu peux maintenant te connecter.";
-      // Option : renvoyer vers login
-      setTimeout(() => (window.location.href = "/login.html"), 900);
-    } catch (err) {
+      const res = await fetch("/api/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password })
+      });
+
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.message);
+
+      msg.textContent = "Compte créé avec succès ✅";
       msg.style.display = "block";
+
+      setTimeout(() => {
+        window.location.href = "/login.html";
+      }, 1000);
+
+    } catch (err) {
       msg.textContent = err.message;
+      msg.style.display = "block";
     }
   });
 }
@@ -319,12 +324,79 @@ function initStatsPage() {
   statNb.textContent = String(nb);
   statMoy.textContent = moy.toFixed(2);
 }
+async function apiRegister(username, password) {
+  const res = await fetch("/api/register", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ username, password })
+  });
+
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) {
+    throw new Error(data.message || "Erreur lors de la création du compte");
+  }
+  return data;
+}
+
+function initRegisterPage() {
+  const form = document.getElementById("registerForm");
+  const btn = document.getElementById("registerBtn");
+  const userInput = document.getElementById("regUsername");
+  const passInput = document.getElementById("regPassword");
+  const msgErr = document.getElementById("registerMsg");
+  const msgOk = document.getElementById("registerOk");
+
+  if (!form || !btn || !userInput || !passInput) return;
+
+  function showError(text) {
+    if (msgOk) msgOk.style.display = "none";
+    if (msgErr) {
+      msgErr.textContent = text;
+      msgErr.style.display = "block";
+    }
+  }
+
+  function showOk(text) {
+    if (msgErr) msgErr.style.display = "none";
+    if (msgOk) {
+      msgOk.textContent = text;
+      msgOk.style.display = "block";
+    }
+  }
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault(); // 🔥 IMPORTANT : empêche le rechargement
+
+    const username = userInput.value.trim();
+    const password = passInput.value;
+
+    if (username.length < 3) return showError("Nom d’utilisateur trop court (min 3).");
+    if (password.length < 6) return showError("Mot de passe trop court (min 6).");
+
+    btn.disabled = true;
+
+    try {
+      await apiRegister(username, password);
+      showOk("Compte créé ✅ Redirection vers la connexion...");
+
+      setTimeout(() => {
+        window.location.href = "/login.html";
+      }, 900);
+    } catch (err) {
+      showError(err.message);
+    } finally {
+      btn.disabled = false;
+    }
+  });
+}
+
 
 // ================== INIT GLOBAL ==================
 (async () => {
   await protegerPages();
   await injecterDeconnexion();
   initLoginPage();
+  initRegisterPage(); // ✅ AJOUTE ÇA
   initVentesPage();
   initStatsPage();
 })();
